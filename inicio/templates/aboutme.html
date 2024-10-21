@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title_head %}
+About me
+{% endblock title_head %}
+{% block h1_header %}About me{% endblock h1_header %}
+
+{% block main %}
+
+
+    <div class="container">
+        <main>
+            <div class="bio">
+                <img src= {% static 'mifoto.jpg' %} alt="Descripción de la imagen" width="300" height="300">
+                <p>Hola, soy Angela Fernández y esta es mi página personal. Soy estudiante de licenciatura en biotecnología, apasionada por la química y la programación.</p>
+            </div>
+
+            <section class="projects">
+                <h2>Proyectos actuales</h2>
+                <p>Actualmente estoy aprendiendo python en CoderHouse y SQL online para profundizar mis conocimientos en la programación</p>
+            </section>
+
+            <section class="interests">
+                <h2>Intereses</h2>
+                <p>En mi tiempo libre me gusta leer, programar y jugar videojuegos.</p>
+            </section>
+
+            <section class="contact">
+                <h2>Conéctame</h2>
+                <p>Puedes seguirme en:</p>
+                <ul>
+                    <li><a href="https://instagram.com/angela__fernandezz">Instagram</a></li>
+                    <li><a href="https://github.com/http-angelafernandez">GitHub</a></li>
+                </ul>
+            </section>
+        </main>
+
+{% endblock main %}
+

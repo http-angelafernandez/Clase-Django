@@ -2,10 +2,10 @@ from django.db import models
 
 # Create your models here.
  
-class Auto(models.Model):
-    marca = models.CharField(max_length=15) 
-    modelo = models.CharField(max_length=15)
-    anio = models.IntegerField()
+class Libro(models.Model):
+    nombre = models.CharField(max_length=30) 
+    genero = models.CharField(max_length=30)
+    autor = models.CharField(max_length=30)
 
     def __str__(self):
-        return f'{self.marca} {self.modelo}'
+        return f'{self.nombre}'

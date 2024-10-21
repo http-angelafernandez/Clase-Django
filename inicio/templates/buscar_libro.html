@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title_head %}
+Buscar Libro
+{% endblock title_head %}
+{% block h1_header %}Buscar Libro{% endblock h1_header %}
+{% block main %}
+
+<form action={% url "buscar_libro" %}>
+    {{form}}
+    <input type="submit">
+</form>
+
+{% if libros %}
+<ul>
+    {% for libro in libros %}
+    <li>
+        {{libro}} 
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay libros registrados.</p>
+{% endif %}
+
+{% endblock main %}

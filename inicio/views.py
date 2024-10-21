@@ -1,57 +1,53 @@
 from django.http import HttpResponse
 from django.template import Template, Context, loader
-from datetime import datetime
-from django.shortcuts import render
-from inicio.models import Auto
-
-def mi_vista(request):
-    return HttpResponse('Hola soy la vista')
+from django.shortcuts import render, redirect
+from inicio.models import Libro
+from inicio.forms import CrearLibroFormulario, BuscarLibroFormulario
 
 def inicio(request):
     # return HttpResponse('<h1> Soy la pantalla de inicio </h1>')
     return render(request, 'index.html')
 
-def vista_datos1(request, nombre):
-    nombre_mayuscula = nombre.upper()
-    return HttpResponse(f'Hola {nombre_mayuscula} !!')
+def aboutme(request):
+    return render(request, 'aboutme.html')
+    
 
-def primer_template(request):
+def buscar_libro(request):
+    formulario = BuscarLibroFormulario(request.GET)
+    libros = []  
+
+    if formulario.is_valid():
+        nombre = formulario.cleaned_data.get('nombre')
+        genero = formulario.cleaned_data.get('genero')
+        filters = {}
+
+        if nombre:
+            filters['nombre__icontains'] = nombre
+        
+        if genero: 
+            filters['genero__icontains'] = genero
+
+        libros = Libro.objects.filter(**filters)
+
+    return render(request, 'buscar_libro.html', {'libros': libros, 'form': formulario})
 
 
-    with open (r'templates\primer_template.html') as archivo_del_template:
-        template = Template(archivo_del_template.read())
+def crear_libro(request):
    
-    contexto = Context()
-    render_template = template.render(contexto) 
-    return HttpResponse(render_template)
+    print('Request', request)
+    print('GET', request.GET) 
+    print('POST', request.POST)
 
-def segundo_template(request):
+    formulario = CrearLibroFormulario()
 
-    fecha_actual = datetime.now
-    datos = {
-        'fecha_actual': fecha_actual,
-        'numeros': list(range(1, 11))
-             
-    }
+    if request.method == 'POST':
+
+
+       formulario = CrearLibroFormulario(request.POST)
+       if formulario.is_valid():
+           data = formulario.cleaned_data
+           libro = Libro(nombre=request.POST.get('nombre'), genero=request.POST.get('genero'), autor=request.POST.get('autor'))
+           libro.save()
+           return redirect('buscar_libro')
     
-
-
-    # v1
-    #with open (r'templates\segundo_template.html') as archivo_del_template:
-    #    template = Template(archivo_del_template.read())
-    #contexto = Context(datos)
-    #render_template = template.render(contexto) 
-
-    # v2
-    # template = loader.get_template('segundo_template.html')
-    # render_template = template.render(datos)
-    # return HttpResponse(render_template)
-
-    # v3
-    return render(request, 'segundo_template.html', datos)
-    
-def crear_auto(request, marca, modelo, anio):
-    
-    auto = Auto(marca=marca, modelo=modelo, anio=anio)
-    auto.save()
-    return render(request, 'creacion_auto_correcta.html', {'auto': auto})
+    return render(request, 'crear_libro.html', {'form': formulario})
