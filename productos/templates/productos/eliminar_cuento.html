@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_head %}
+Eliminar cuento
+{% endblock title_head %}
+{% block h1_header %} Eliminar cuento {% endblock h1_header %}
+{% block main %}
+
+ <form action={% url "productos:eliminar_cuento" cuento.id %} method="POST">
+    {% csrf_token %}
+    <p>¿Desea eliminar el cuento {{cuento}}?</p>
+    
+    <input type="submit" value="Confirmar">
+
+</form> 
+
+
+
+{% endblock main %}

@@ -33,7 +33,21 @@
                 <a class="navbar-brand" href={% url "crear_libro" %}>Crear libro</a>
                 <a class="navbar-brand" href={% url "buscar_libro" %}>Buscar libro</a> 
                 <a class="navbar-brand" href={% url "about_me" %}>About me</a>
-                {% comment %} <a class="btn btn-primary" href="#signup">Sign Up</a> {% endcomment %}
+                <a class="navbar-brand" href={% url "productos:crear_cuento" %}>Crear cuento</a>
+                <a class="navbar-brand" href={% url "productos:listado_cuentos" %}>Cuentos</a>
+                {% if request.user.is_authenticated %}
+                    <a class="navbar-brand" href="#">{{request.user.username}}</a>
+                    <form action={% url "usuarios:logout" %} method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-secondary" value="Cerrar Sesion">
+                    </form>
+                {% else %}
+                    <a class="btn btn-primary" href={% url "usuarios:login" %}>Iniciar sesion</a>
+                    <a class="btn btn-info" href={% url "usuarios:register" %}>Registrarse</a>
+                {% endif %}
+
+
+                
             </div>
         </nav>
         <!-- Masthead-->

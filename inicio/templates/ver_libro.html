@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title_head %}
+Ver libro
+{% endblock title_head %}
+{% block h1_header %}Ver libro{% endblock h1_header %}
+{% block main %}
+<ul>
+
+    <li>Titulo: {{libro.nombre}}</li>
+    <li>Genero: {{libro.genero}}</li>
+    <li>Autor: {{libro.autor}}</li>
+
+
+</ul>
+{% endblock main %}
+

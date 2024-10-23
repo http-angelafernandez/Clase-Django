@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_head %}
+Ver cuento
+{% endblock title_head %}
+{% block h1_header %}Ver cuento{% endblock h1_header %}
+{% block main %}
+<ul>
+
+    <li>Titulo: {{cuento.titulo}}</li>
+    <li>Autor: {{cuento.autor}}</li>
+    <li>Fecha: {{cuento.fecha}}</li>
+
+
+
+</ul>
+{% endblock main %}

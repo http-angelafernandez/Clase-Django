@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title_head %}
+Listado Cuentos
+{% endblock title_head %}
+{% block h1_header %}Listado Cuentos{% endblock h1_header %}
+{% block main %}
+
+{% comment %} <form action={% url "buscar_libro" %}>
+    {{form}}
+    <input type="submit">
+</form> {% endcomment %}
+
+<a class="navbar-brand" href={% url "productos:crear_cuento" %}>Nuevo cuento</a>
+
+{% if cuentos %}
+<ul>
+    {% for cuento in cuentos %}
+    <li> {{cuento}} 
+        | <a href={% url "productos:ver_cuento" cuento.id %}>Ver cuento</a>
+        | <a href={% url "productos:editar_cuento" cuento.id %}>Editar</a> |
+        | <a href={% url "productos:eliminar_cuento" cuento.id %}>Eliminar</a> | 
+
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay cuentos registrados.</p>
+{% endif %}
+
+{% endblock main %}

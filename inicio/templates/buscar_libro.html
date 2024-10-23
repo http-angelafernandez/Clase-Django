@@ -14,8 +14,11 @@ Buscar Libro
 {% if libros %}
 <ul>
     {% for libro in libros %}
-    <li>
-        {{libro}} 
+    <li> {{libro}} 
+        | <a href={% url "ver_libro" libro.id %}>Ver mas</a> |
+        | <a href={% url "editar_libro" libro.id %}>Editar</a> |
+        | <a href={% url "eliminar_libro" libro.id %}>Eliminar</a> | 
+        
     </li>
     {% endfor %}
 </ul>
