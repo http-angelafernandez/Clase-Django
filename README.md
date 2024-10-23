@@ -1,2 +1,2 @@
-# Bienvenidos a mi primer proyecto # Tercera-pre-entrega
+# Bienvenidos a mi primer proyecto
 # Clase-Django
